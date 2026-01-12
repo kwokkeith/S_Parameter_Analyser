@@ -63,3 +63,14 @@ def load_component(
         type=comp_data["type"],
         S_parameter=S_param_dict,
     )
+
+
+def common_freqs_hz(components: list[Component]) -> list[int]:
+    if not components:
+        return []
+
+    common = set(components[0].S_parameter.keys())
+    for comp in components[1:]:
+        common &= set(comp.S_parameter.keys())
+
+    return sorted(common)

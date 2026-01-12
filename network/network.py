@@ -78,7 +78,7 @@ class Network:
                 print(f"Frequency: {freq} Hz")
                 for idx, comp in enumerate(self._components):
                     print(f"  Component {idx}: {comp.name}, type = {comp.type} ")
-                    print(f"  S-Parameters: {comp.S_parameter[freq]}\n")
+                    print(f"  S-Parameters: \n{comp.S_parameter[freq]}\n")
 
                 # Overall S-Parameters
                 overall_S = self.S_matrix[freq]
