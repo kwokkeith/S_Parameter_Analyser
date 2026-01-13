@@ -33,8 +33,8 @@ def load_component(
 
         # Function converts amplitude and degree phase into complex representation
         def form_complex(S_A: str, S_p: str) -> complex:
-            mag = float(row[S_A])
-            phase = np.deg2rad(float(row[S_p]))
+            mag = _clean_DB_Deg_magnitude(row[S_A])
+            phase = np.deg2rad(_clean_DB_Deg_magnitude(row[S_p]))
             return complex(mag * np.cos(phase), mag * np.sin(phase))
 
         for row in reader:
@@ -74,3 +74,20 @@ def common_freqs_hz(components: list[Component]) -> list[int]:
         common &= set(comp.S_parameter.keys())
 
     return sorted(common)
+
+
+def _clean_DB_Deg_magnitude(input_s2p_mag: str) -> float:
+    """Cleans magnitude string from s2p file in dB format to float.
+
+    Handles values like ' -1.234E+01DB ', '1,23E-001dB', etc.
+    """
+    s = input_s2p_mag.strip()
+
+    # Remove dB marker (case-insensitive)
+    s = s.upper().replace("DB", "").strip()
+
+    # Normalize possible locale / Fortran-style formats
+    s = s.replace(",", ".")  # e.g. '1,23E+01' -> '1.23E+01'
+    s = s.replace("D", "E")  # e.g. '1.0D+01' -> '1.0E+01'
+
+    return float(s)
