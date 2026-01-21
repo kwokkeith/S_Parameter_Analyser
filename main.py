@@ -38,9 +38,9 @@ def main() -> None:
     # Display output network S-parameters
     # print("=" * 40)
 
-    # # # Display network details at common frequencies
-    # # network.display_network(freqs=global_freqs)
-    # # print("=" * 40)
+    # Display network details at common frequencies
+    network.display_network(freqs=global_freqs)
+    print("=" * 40)
 
     analyser = NetworkAnalyser(network=network)
     analyser.summary
@@ -48,3 +48,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# Polyfit S-parameters over frequency range --> coefficients
