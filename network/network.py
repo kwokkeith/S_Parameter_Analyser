@@ -10,7 +10,7 @@ class Network:
     S_matrix: dict[
         np.int64, np.ndarray[np.complex128]
     ]  # Overall S-matrix at different frequencies
-    freqs: list[np.int64] = None  # Frequencies at which S-parameters are defined
+    freqs: list[np.int64]  # Frequencies at which S-parameters are defined
 
     def __init__(
         self, components: list[Component], freqs: list[np.int64] = [], z_0: float = 50.0

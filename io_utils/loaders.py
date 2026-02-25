@@ -12,6 +12,8 @@ def load_component(
 ) -> Component:
     S_param_dict: dict[int, np.ndarray] = {}
     S_param_file = path_to_S_parameters_fdr / f"{comp_data['type']}.csv"
+    if not S_param_file.is_file():
+        raise FileNotFoundError(f"Component of type '{comp_data['type']}' not found. \nFilePath: {S_param_file}")
 
     with open(S_param_file, "r", newline="") as csvfile:
         reader = csv.DictReader(csvfile)
